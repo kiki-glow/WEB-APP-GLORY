@@ -1,0 +1,963 @@
+/* ====================================================================================================================
+  ================================  IMPORTED FONTS FROM GOOGLE FONTS  ==============================================================
+  ==================================================================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Clicker+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* ====================================================================================================================
+================================  INITIAL SETTING FOR THE CSS BOX MODEL ||| STRIPPING ALL INITIAL DEFAULT BROWSER STYLES  ==============================================================
+==================================================================================================================== */
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: var(--light_txt);
+  font-family: Poppins;
+}
+
+/* ====================================================================================================================
+================================  ROOT SETTINGS ~ FOR EASY MODIFICATION ||| ALSO  LIGHT MODE COLOR PALETTE  ==============================================================
+==================================================================================================================== */
+:root {
+  --primary: #05aa05;
+  --primary2: #227a17;
+  --primary3: #aafa9a;
+
+  --red: #e23c1f;
+
+  --bg_bright: #dddee0;
+  --bg_bright2: #d6d3d3;
+  --bg_dim: #757574;
+  --bg_dim2: #080808;
+
+  --border_bright: #d1d5db;
+  --border_dim: #464b53;
+
+  --light_txt: #e7e8e9;
+  --light_txt2: #8d8f91;
+
+  --white: black;
+  --black: rgb(235, 217, 202);
+
+  --scroll_color: #ababab;
+}
+
+/* ====================================================================================================================
+================================   DARK MODE COLOR PALETTE   ==============================================================
+==================================================================================================================== */
+.DARK {
+  --bg_bright: #23262b;
+  --bg_bright2: #23262b;
+  --bg_dim: #000207;
+  --bg_dim2: #000207;
+
+  --border_bright: #3e3e3f;
+  --border_dim: #757677;
+
+  --light_txt: #f5f6f8;
+  --light_txt2: #f5f6f8;
+
+  --white: white;
+  --black: black;
+
+  --scroll_color: black;
+}
+
+html {
+  scroll-behavior: smooth; /*SMOOTH SCROLL IN THE PAGE*/
+  scrollbar-color: var(--scroll_color) var(--primary); /*CUSTOMIZED SCROLL BAR FOR OLD BROWSERS*/
+  overflow-x: hidden; /*HIDES OVERFLOW*/
+  width: 100%;
+}
+
+/* ====================================================================================================================
+================================   CUSTOMIZED SCROLL BAR   ==============================================================
+==================================================================================================================== */
+::-webkit-scrollbar {
+  width: 1.3vw;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scroll_color);
+  border-radius: 100vw;
+  margin-block: 0.1vw;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border: 0.2vw solid var(--scroll_color);
+  border-radius: 100vw;
+}
+
+body {
+  background-color: var(--bg_bright);
+  transition: all 0.5s ease-in-out;
+  overflow-x: hidden; /*HIDES OVERFLOW*/
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ====================================================================================================================
+================================   PRE-LOADER   ==============================================================
+==================================================================================================================== */
+.pre_loader {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 100;
+  opacity: 1;
+  background: var(--bg_bright);
+}
+
+.loader {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ring {
+  width: 200px;
+  height: 200px;
+  border: 0px solid var(--bg_bright);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.ring:nth-child(1) {
+  border-bottom-width: 8px;
+  border-color: var(--primary);
+  animation: rotate1 2s linear infinite;
+}
+
+.ring:nth-child(2) {
+  border-right-width: 8px;
+  border-color: rgb(10, 156, 254);
+  animation: rotate2 2s linear infinite;
+}
+
+.ring:nth-child(3) {
+  border-top-width: 8px;
+  border-color: rgb(7, 199, 0);
+  animation: rotate3 2s linear infinite;
+}
+
+.loading {
+  color: rgb(255, 0, 170);
+  animation: text 2s ease-in-out infinite;
+  font-size: 85%;
+}
+
+@keyframes rotate1 {
+  0% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate2 {
+  0% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+  }
+}
+
+@keyframes rotate3 {
+  0% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+  }
+}
+
+@keyframes text {
+  50% {
+    color: var(--bg_bright);
+  }
+}
+
+/*
+==========SECTIONS CONTAINER=========
+*/
+.SECTIONS {
+  position: relative;
+  width: 100%;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ====================================================================================================================
+  ================================   GLASSY NAV BAR   ==============================================================
+  ==================================================================================================================== */
+nav {
+  position: sticky; /*NAV BAR STICKS AT THE TOP WEN TOP IS 0*/
+  top: 0px;
+  background-color: var(--black);
+  z-index: 1000;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+}
+
+.logo a img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.logo a span {
+  color: var(--primary);
+  font-family: Clicker Script;
+  font-size: 35px;
+  margin-top: -5px;
+}
+
+menu ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+}
+
+.NAV_TOGGLER {
+  display: none;
+}
+
+ul li a {
+  font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+ul li a:hover {
+  color: var(--primary);
+}
+
+.dark-mode {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.DL_ICON {
+  transition: all 0.3s ease-in-out;
+}
+
+.DL_ICON:hover {
+  color: var(--primary);
+}
+
+/* ====================================================================================================================
+  ================================   DARK MODE/LIGHTMODE BUTTON   ==============================================================
+  ==================================================================================================================== */
+.DAY_NIGHT i {
+  /*DARK MODE/LIGHTMODE BUTTON*/
+  color: var(--white);
+  padding: 5px;
+  padding-bottom: 6px;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  font-size: 23px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ====================================================================================================================
+  ================================   PROFILE PIC BUTTON   ==============================================================
+  ==================================================================================================================== */
+.user-icon {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.user-icon img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: var(--black);
+  border-radius: 10px;
+  width: 200px;
+  padding: 10px 30px;
+  box-shadow: 0px 8px 16px 0px var(--white);
+  z-index: 10000;
+}
+
+.dropdown-item {
+  display: flex;
+  padding: 10px;
+  width: fit-content;
+  text-decoration: none;
+  color: var(--light_txt);
+  cursor: pointer;
+}
+
+.btn {
+  width: fit-content;
+  padding: 10px 20px;
+  background: var(--primary);
+  border-radius: 7px;
+  outline: transparent;
+  border: transparent;
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background: var(--primary2);
+}
+
+.btn2 {
+  width: fit-content;
+  padding: 10px 20px;
+  background: var(--primary);
+  border-radius: 7px;
+  outline: transparent;
+  border: transparent;
+  font-size: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn2:hover {
+  background: var(--primary2);
+}
+
+/* ====================================================================================================================
+================================  LOGIN PAGE  ==============================================================
+==================================================================================================================== */
+.login {
+  background: url(../images/5.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.MyLoginForm {
+  width: 700px;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  color: var(--light_txt);
+  background-color: transparent;
+  border-radius: 20px;
+  backdrop-filter: blur(30px);
+}
+
+.MyLoginForm h1 {
+  letter-spacing: 2px;
+}
+
+.LOGIN_LINK_ITEM {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.LOGIN_LINK_ITEM:hover {
+  color: var(--primary2);
+}
+
+/* ====================================================================================================================
+================================  REGISTER PAGE  ==============================================================
+==================================================================================================================== */
+.register {
+  background: url(../images/reg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.MyRegisterForm {
+  width: 700px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  color: var(--light_txt);
+  background-color: transparent;
+  border-radius: 20px;
+  backdrop-filter: blur(30px);
+}
+
+.MyRegisterForm h1 {
+  letter-spacing: 2px;
+}
+
+/* ====================================================================================================================
+================================  RESET PASSWORD PAGE  ==============================================================
+==================================================================================================================== */
+.resetPassword {
+  background: url(../images/reset.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.MyResetPasswordForm {
+  width: 700px;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  color: var(--light_txt);
+  background-color: transparent;
+  border-radius: 20px;
+  backdrop-filter: blur(30px);
+}
+
+.MyResetPasswordForm h1 {
+  letter-spacing: 2px;
+}
+
+/* ====================================================================================================================
+================================  404 PAGE  ==============================================================
+==================================================================================================================== */
+.page404 {
+  background: url(../images/4.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.INPUT {
+  border-radius: 10px;
+  color: var(--light_txt);
+  background: transparent;
+  border: 2px solid var(--primary);
+  padding: 7px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.SUCCESS {
+  color: var(--primary);
+  padding: 20px 0px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.SUCCESSBOX2 {
+  display: flex;
+  justify-content: center;
+}
+
+.SUCCESS2 {
+  color: var(--primary);
+  padding: 20px 70px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(30px);
+  border-radius: 30px;
+  width: fit-content;
+  transition: all 0.3s ease-in-out;
+}
+
+.ERROR {
+  color: red;
+  padding: 20px 0px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.Card {
+  border-radius: 10px;
+  padding: 30px 60px;
+  box-shadow: 0 0 20px 0px var(--bg_dim);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  margin-left: -20px;
+  margin-right: 20px;
+  border-bottom: 10px solid var(--primary);
+  transition: all 0.3s ease-in-out;
+}
+
+/* ====================================================================================================================
+================================  CONTACT PAGE  ==============================================================
+==================================================================================================================== */
+#Contact {
+  padding: 60px 20px;
+  background: var(--bg_bright2);
+  margin-top: -24px;
+}
+
+.SECTION_TITLE {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 50px;
+  border-radius: 80px;
+  background: var(--primary3);
+  color: var(--primary);
+}
+
+.CONTACT .ROW {
+  display: flex;
+  justify-content: center;
+}
+
+.CONTACT_TITLE {
+  display: flex;
+  justify-content: center;
+}
+
+.CONTACT_TITLE p {
+  font-weight: bold;
+  color: var(--light_txt);
+  font-size: 50px;
+  padding: 10px 0px;
+}
+
+.CONTACT_BOX {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.CONTACT_FORM_BOX {
+  padding-right: 30px;
+  padding-left: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-row {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.CONTACT_FORM {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CONTACT_FORM_ITEM1 {
+  display: flex;
+  gap: 30px;
+  padding-bottom: 10px;
+}
+
+.FORM_ITEM {
+  margin-bottom: 10px;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.FORM_ITEM2 {
+  width: 50%;
+}
+
+.FORM_CONTROL {
+  width: 100%;
+  height: 60px;
+  padding: 20px;
+  border-radius: 40px;
+  border: none;
+  background: var(--bg_bright);
+  transition: all 0.3s ease-in-out;
+}
+
+.FORM_CONTROL:focus {
+  box-shadow: 0 0 17px 5px var(--border_dim);
+}
+
+.FORM_CONTROL_MESSAGE {
+  width: 100%;
+  height: 260px;
+  padding: 20px;
+  border-radius: 40px;
+  border: none;
+  background: var(--bg_bright);
+  resize: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.FORM_CONTROL_MESSAGE:focus {
+  box-shadow: 0 0 17px 5px var(--border_dim);
+}
+
+.SUBMIT_BTN {
+  padding: 10px 80px;
+  border-radius: 20px;
+}
+
+.deatails-title-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details-title {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  padding: 4px 30px;
+  border-radius: 80px;
+  background: var(--primary3);
+  color: var(--primary);
+}
+
+.deatails-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.details-label {
+  color: var(--primary2);
+}
+
+.details-response {
+  border-radius: 80px;
+  color: var(--light_txt);
+  background: transparent;
+  border: 1px solid var(--primary);
+  padding: 3px 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ====================================================================================================================
+================================  FOOTER STYLING ||| REUSABLE CODE FOR ALL THE PAGES  ==============================================================
+==================================================================================================================== */
+.Footer {
+  background-color: var(--black);
+  padding: 0px 40px;
+  padding-top: 12px;
+  color: rgb(94, 92, 92);
+  font-size: 15px;
+}
+
+.Footer .ROW {
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.footer-text {
+  padding-top: 10px;
+}
+
+.w-1 {
+  width: 50%;
+}
+
+.FOOTER_TITLE {
+  font-size: 23px;
+  padding-bottom: 12px;
+  transition: all 0.3s ease-in-out;
+}
+
+.CONTACT_LINKS {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.contactus {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.contact-box {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.contact-box:hover {
+  color: var(--primary);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.DEV {
+  border-top: 2px solid var(--border_bright);
+  width: 100%;
+}
+
+.DEV .ROW {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+/* ====================================================================================================================================================  MEDIA QUERIES  ================================================================================================================================================================================== */
+
+/*MOBILE PHONES*/
+@media screen and (max-width: 640px) {
+  nav {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  menu ul {
+    position: fixed;
+    height: 100vh;
+    width: 80%;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: var(--black);
+    display: flex;
+    justify-items: center;
+    flex-direction: column;
+    padding: 150px 20px;
+    z-index: 1000;
+  }
+
+  .CLOSE_BTN_BOX {
+    display: flex;
+    cursor: pointer;
+    align-items: end;
+    justify-content: end;
+    padding-bottom: 50px;
+  }
+
+  .CLOSE_BTN {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 80px;
+    border: 3px solid var(--primary);
+    background: var(--white);
+    color: var(--black);
+  }
+
+  .NAV_TOGGLER {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border-radius: 80px;
+    border: 3px solid var(--primary);
+    background: var(--white);
+  }
+
+  .NAV_TOGGLER_CLOSE {
+    display: none;
+  }
+
+  .NAV_TOGGLER span {
+    font-size: 20px;
+    display: inline-block;
+    position: relative;
+    z-index: 100;
+  }
+
+  .NAV_TOGGLER span i {
+    color: var(--black);
+  }
+
+  menu ul li a {
+    font-size: 20px;
+  }
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: -120px;
+    right: 0;
+    background-color: var(--black);
+    border-radius: 10px;
+    width: 200px;
+    padding: 10px 30px;
+    box-shadow: 0px 8px 16px 0px var(--white);
+    z-index: 10000;
+  }
+
+  .btn {
+    padding: 5px 60px;
+  }
+
+  .btn2 {
+    padding: 5px 40px;
+  }
+
+  .btn {
+    width: fit-content;
+  }
+
+  /* ====================================================================================================================
+================================  REGISTER PAGE  ==============================================================
+==================================================================================================================== */
+  .MyRegisterForm {
+    padding: 20px 20px;
+    gap: 20px;
+  }
+
+  .Card {
+    padding: 30px 10px;
+    width: 120%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* ====================================================================================================================
+================================  CONTACT PAGE  ==============================================================
+==================================================================================================================== */
+  .CONTACT_TITLE p {
+    font-size: 23px;
+    padding: 5px 0px;
+  }
+
+  .CONTACT_FORM_BOX {
+    padding-left: 10px;
+    flex-direction: column;
+  }
+
+  .CONTACT_FORM_ITEM1 {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .FORM_ITEM2 {
+    width: 100%;
+  }
+
+  .SUBMIT_BTN {
+    padding: 5px 60px;
+  }
+
+  .deatails-item {
+    flex-direction: column;
+  }
+
+  /* ====================================================================================================================
+  ================================  FOOTER STYLING ||| REUSABLE CODE FOR ALL THE PAGES  ==============================================================
+  ==================================================================================================================== */
+  .Footer {
+    padding: 0px 50px;
+    padding-top: 40px;
+  }
+
+  .Footer .ROW {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .w-1 {
+    width: 100%;
+  }
+}
